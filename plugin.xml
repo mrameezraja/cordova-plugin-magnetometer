@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  id="com.mrameezraja.plugins.magnetometer"
+  version="0.0.1">
+
+    <name>Magneto Meter</name>
+    <author>Rameez Raja</author>
+    <description>Magnetic Interference detector Plugin</description>
+    <license>MIT</license>
+    
+    <js-module src="www/magneto-meter.js" name="gps">
+        <clobbers target="cordova.plugins.magnetoMeter" />
+    </js-module>
+
+   <!-- ios -->
+    <platform name="ios">
+      <config-file target="config.xml" parent="/*">
+          <feature name="MagnetoMeter">
+              <param name="ios-package" value="MagnetoMeter"/>
+          </feature>
+      </config-file>
+
+      <header-file src="src/ios/MagnetoMeter.h" />
+      <source-file src="src/ios/MagnetoMeter.m" />
+
+      <!--<framework src="CoreLocation.framework" weak="true" />
+      <framework src="MobileCoreServices.framework" weak="true" />
+      <framework src="CoreGraphics.framework" />-->
+    </platform>
+</plugin>
