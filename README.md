@@ -16,7 +16,7 @@ Methods
 
 
 cordova.plugins.magnetoMeter.watchMagnitude
-=================
+-------------------------------------------
 
 <pre>
 <code>
@@ -35,7 +35,7 @@ Readings:
 - z
 
 cordova.plugins.magnetoMeter.stop
-=================
+--------------------------------
 
 <pre>
 <code>
