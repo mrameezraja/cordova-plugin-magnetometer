@@ -43,17 +43,17 @@
     NSLog(@"stopWatch");
     [self.locationManager stopUpdatingHeading];
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
-    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 - (void)startMagnetoMeter {
     NSLog(@"startMagnetoMeter");
 	// setup the location manager
 	_locationManager = [[CLLocationManager alloc] init];
-	
+
 	// check if the hardware has a compass
 	if ([CLLocationManager headingAvailable] == NO) {
-		// No compass is available. This application cannot function without a compass, 
+		// No compass is available. This application cannot function without a compass,
         // so a dialog will be displayed and no magnetic data will be measured.
         self.locationManager = nil;
         UIAlertView *noCompassAlert = [[UIAlertView alloc] initWithTitle:@"No Compass!"
@@ -65,10 +65,10 @@
 	} else {
         // heading service configuration
         self.locationManager.headingFilter = kCLHeadingFilterNone;
-        
+
         // setup delegate callbacks
         self.locationManager.delegate = self;
-        
+
         // start the compass
         [self.locationManager startUpdatingHeading];
     }
@@ -86,7 +86,7 @@
 
 // This delegate method is invoked when the location manager has heading data.
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)heading {
-    
+
     // Compute and display the magnitude (size or strength) of the vector.
 	//      magnitude = sqrt(x^2 + y^2 + z^2)
 	CGFloat magnitude = sqrt(heading.x*heading.x + heading.y*heading.y + heading.z*heading.z);
@@ -96,7 +96,7 @@
     [jsonObj setValue: [NSString stringWithFormat:@"%.1f", heading.y] forKey:@"y"];
     [jsonObj setValue: [NSString stringWithFormat:@"%.1f", heading.z] forKey:@"z"];
     [jsonObj setValue: [NSString stringWithFormat:@"%.1f", magnitude] forKey:@"magnitude"];
-    
+
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:jsonObj];
     [result setKeepCallbackAsBool:1];
     [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
@@ -114,4 +114,3 @@
 
 
 @end
-
